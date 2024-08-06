@@ -1,25 +1,50 @@
-// import { createRouter, createWebHashHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import LoginView from '../views/LoginView.vue'
+import store from '../store/store'
+const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    alias: '/',
+    component: LoginView,
+    meta: {
+      auth: false
+    }
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: () => import('../views/HomeView.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/AboutView.vue'),
+    meta: {
+      auth: true
+    }
+  }
+]
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: HomeView
-//   },
-//   {
-//     path: '/about',
-//     name: 'about',
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-//   }
-// ]
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
+})
 
-// const router = createRouter({
-//   history: createWebHashHistory(),
-//   routes
-// })
+router.beforeEach((to, from, next)=>{
+  const requireAuth = to.meta.auth
+  if(requireAuth && store.getters['auth/isAuthenticated']){
+    next()
+  }
+  else if(requireAuth && !store.getters['auth/isAuthenticated']){
+    next('/login?message=auth')
+  }
+  else{
+    next()
+  }
+})
 
-// export default router
+export default router
