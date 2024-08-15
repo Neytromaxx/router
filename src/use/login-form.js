@@ -6,7 +6,9 @@ import {useRouter} from "vue-router";
 
 export function useLoginForm(){
     const store = useStore()
+    console.log(store)
     const router = useRouter()
+    
     const {handleSubmit , isSubmitting, submitCount} = useForm()
     const {value:user, errorMessage:userError, handeBlur:userBlur} = useField('user',
         yup
@@ -24,7 +26,7 @@ export function useLoginForm(){
 
     const submit = handleSubmit(async values => {
        await store.dispatch('auth/login', values)
-       await router.push('/')
+       await router.push('/home')
     })
 
     const urinish = computed( ()=> submitCount.value>1 )

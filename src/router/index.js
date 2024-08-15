@@ -3,7 +3,7 @@ import LoginView from '../views/LoginView.vue'
 import store from '../store/store'
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     alias: '/',
     component: LoginView,
@@ -12,7 +12,7 @@ const routes = [
     }
   },
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: () => import('../views/HomeView.vue'),
     meta: {

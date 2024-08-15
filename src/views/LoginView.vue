@@ -24,20 +24,27 @@
   </form>
 </template>
 
-<script setup>
+<script>
   import {useLoginForm} from '@/use/login-form'
 
-    const {
-        user,
-        userError,
-        userBlur,
-        password,
-        passwordError,
-        passwordBlur,
-        submit,
-        urinish,
-        isSubmitting,
-    } = useLoginForm()
+  export default {
+    setup(){
+        return{
+            ...useLoginForm()
+        }
+    }
+  }
+//     const {
+//         user,
+//         userError,
+//         userBlur,
+//         password,
+//         passwordError,
+//         passwordBlur,
+//         submit,
+//         urinish,
+//         isSubmitting,
+//     } = useLoginForm()
 
 </script>
 
