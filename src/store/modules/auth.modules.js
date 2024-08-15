@@ -20,7 +20,7 @@ export default{
     actions:{
         async login({commit}, payload){
             try{
-                const url = `https://aoutoapi.dezinfeksiyatashkent.uz/api/auth/signin`
+                const url = `https://autoapi.dezinfeksiyatashkent.uz/api/auth/signin`
                 const {data} = axios.post(url,{ ...payload, returnSecureToken:true})
                 commit('setToken', data.idToken)
                 console.log(data)
